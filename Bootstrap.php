@@ -6,7 +6,7 @@
  * @author Rochdi B. <rochdi80tn@gmail.com>
  */
 
-namespace mhussain001\mailqueue;
+namespace xeois\mailqueue;
 
 use yii\base\Application;
 use yii\base\BootstrapInterface;
@@ -15,7 +15,7 @@ use yii\base\BootstrapInterface;
 /**
  * Class Bootstrap
  * 
- * @package mhussain001\mailqueue;
+ * @package xeois\mailqueue;
  * @author Rochdi B. <rochdi80tn@gmail.com>
  */
 class Bootstrap implements BootstrapInterface
@@ -31,7 +31,7 @@ class Bootstrap implements BootstrapInterface
     {
       
         if ($app instanceof \yii\console\Application) {
-            $app->controllerMap['mailqueue'] = 'mhussain001\mailqueue\commands\MailQueueController';
+            $app->controllerMap['mailqueue'] = 'xeois\mailqueue\commands\MailQueueController';
         }
         
     }

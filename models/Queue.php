@@ -1,11 +1,11 @@
 <?php
 
-namespace mhussain001\mailqueue\models;
+namespace xeois\mailqueue\models;
 
 use Yii;
 use yii\db\ActiveRecord;
-use mhussain001\mailqueue\MailQueue;
-use mhussain001\mailqueue\Message;
+use xeois\mailqueue\MailQueue;
+use xeois\mailqueue\Message;
 
 /**
  * This is the model class for table "{{%mail_queue}}".

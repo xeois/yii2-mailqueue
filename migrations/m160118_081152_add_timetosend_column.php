@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use mhussain001\mailqueue\MailQueue;
+use xeois\mailqueue\MailQueue;
 
 class m160118_081152_add_timetosend_column extends Migration
 {

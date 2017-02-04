@@ -5,12 +5,12 @@
  * @author Saranga Abeykoon http://nterms.com
  */
 
-namespace mhussain001\mailqueue;
+namespace xeois\mailqueue;
 
 use Yii;
 use yii\swiftmailer\Mailer;
-use mhussain001\mailqueue\Message;
-use mhussain001\mailqueue\models\Queue;
+use xeois\mailqueue\Message;
+use xeois\mailqueue\models\Queue;
 
 /**
  * MailQueue is a sub class of [yii\switmailer\Mailer](https://github.com/yiisoft/yii2-swiftmailer/blob/master/Mailer.php)
@@ -22,7 +22,7 @@ use mhussain001\mailqueue\models\Queue;
  * 	'components' => [
  * 		...
  * 		'mailqueue' => [
- * 			'class' => 'mhussain001\mailqueue\MailQueue',
+ * 			'class' => 'xeois\mailqueue\MailQueue',
  *			'table' => '{{%mail_queue}}',
  *			'mailsPerRound' => 10,
  *			'maxAttempts' => 3,
@@ -42,7 +42,7 @@ use mhussain001\mailqueue\models\Queue;
  * @see http://www.yiiframework.com/doc-2.0/yii-swiftmailer-mailer.html
  * @see http://www.yiiframework.com/doc-2.0/ext-swiftmailer-index.html
  *
- * This extension replaces `yii\switmailer\Message` with `mhussain001\mailqueue\Message'
+ * This extension replaces `yii\switmailer\Message` with `xeois\mailqueue\Message'
  * to enable queuing right from the message.
  *
  */
@@ -53,7 +53,7 @@ class MailQueue extends Mailer
 	/**
 	 * @var string message default class name.
 	 */
-	public $messageClass = 'mhussain001\mailqueue\Message';
+	public $messageClass = 'xeois\mailqueue\Message';
 
 	/**
 	 * @var string the name of the database table to store the mail queue.

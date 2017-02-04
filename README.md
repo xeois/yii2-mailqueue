@@ -12,13 +12,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist mhussain001/yii2-mailqueue "*"
+php composer.phar require --prefer-dist xeois/yii2-mailqueue "*"
 ```
 
 or add
 
 ```
-"mhussain001/yii2-mailqueue": "*"
+"xeois/yii2-mailqueue": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -33,7 +33,7 @@ return [
     //....
     'components' => [
         'mailqueue' => [
-            'class' => 'mhussain001\mailqueue\MailQueue',
+            'class' => 'xeois\mailqueue\MailQueue',
 			'table' => '{{%mail_queue}}',
 			'mailsPerRound' => 10,
 			'maxAttempts' => 3,
@@ -60,7 +60,7 @@ return [
     //....
     'components' => [
         'mailqueue' => [
-            'class' => 'mhussain001\mailqueue\MailQueue',
+            'class' => 'xeois\mailqueue\MailQueue',
 			'table' => '{{%mail_queue}}',
         ],
     ],
@@ -70,7 +70,7 @@ return [
 then run `yii migrate` command in command line:
 
 ```
-php yii migrate/up --migrationPath=@vendor/mhussain001/yii2-mailqueue/migrations/
+php yii migrate/up --migrationPath=@vendor/xeois/yii2-mailqueue/migrations/
 ```
 
 Processing the mail queue
@@ -117,7 +117,7 @@ Yii::$app->mailqueue->compose('contact/html')
      ->queue();
 ```
 
-While `mhussain001\mailqueue\MailQueue` extends from `yii\swiftmailer\Mailer`, you can replace it with this extension by adding 
+While `xeois\mailqueue\MailQueue` extends from `yii\swiftmailer\Mailer`, you can replace it with this extension by adding 
 `yii2-swiftmailer` configuations directly to `mailqueue` configurations as follows:
 
 ```php
@@ -125,7 +125,7 @@ return [
     //....
     'components' => [
         'mailqueue' => [
-            'class' => 'mhussain001\mailqueue\MailQueue',
+            'class' => 'xeois\mailqueue\MailQueue',
 			'table' => '{{%mail_queue}}',
 			'mailsPerRound' => 10,
 			'maxAttempts' => 3,
@@ -157,3 +157,5 @@ License
 -------
 
 [MIT](LICENSE)
+# yii2-mailqueue
+enhance version of nterms/yii2-mailque to send and queue. Email queue component for yii2 that works with yii2-swiftmailer.

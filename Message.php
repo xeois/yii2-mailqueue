@@ -5,10 +5,10 @@
  * @author Saranga Abeykoon http://nterms.com
  */
 
-namespace mhussain001\mailqueue;
+namespace xeois\mailqueue;
 
 use Yii;
-use mhussain001\mailqueue\models\Queue;
+use xeois\mailqueue\models\Queue;
 
 /**
  * Extends `yii\swiftmailer\Message` to enable queuing.
