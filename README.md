@@ -142,7 +142,7 @@ return [
 ];
 ```
 
-And use following code for directly sending emails as you ususally do with `yii2-swiftmailer`:
+And use following code for directly sending emails as you ususally do with `yii2-swiftmailer` and also add to db for reference:
 
 ```php
 Yii::$app->mailqueue->compose('contact/html')
