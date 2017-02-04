@@ -2,20 +2,20 @@
 
 /**
  * Message.php
- * @author Mohammad Hussain http://mhussa.in
+ * @author Saranga Abeykoon http://nterms.com
  */
 
 namespace mhussain001\mailqueue;
 
 use Yii;
-use nterms\mailqueue\models\Queue;
+use mhussain001\mailqueue\models\Queue;
 
 /**
  * Extends `yii\swiftmailer\Message` to enable queuing.
  *
  * @see http://www.yiiframework.com/doc-2.0/yii-swiftmailer-message.html
  */
-class Message extends nterms\mailqueue\Message
+class Message extends \yii\swiftmailer\Message
 {
     /**
      * Enqueue the message storing it in database.
@@ -23,28 +23,8 @@ class Message extends nterms\mailqueue\Message
      * @param timestamp $time_to_send
      * @return boolean true on success, false otherwise
      */
-    public function queue($time_to_send = strtotime("+5 minutes"))
+    public function queue($time_to_send = 'now')
     {
-        return $this->mailProcess($time_to_send);
-    }
-
-    /**
-     * Send mail immediately and store in database for audit 
-     * @return boolean true on success, false otherwise
-     */
-    
-    public functin sendNow()
-    {
-        return $this->mailProcess()
-    }
-
-    /**
-     * @param timestamp $time_to_send
-     * Process mail based on time_to_send. If time to send is now then it will send mail right away else it will be queued
-     * @return boolean true on success, false otherwise
-     */
-    
-    protected function mailProcess($time_to_send = 'now')
         if($time_to_send == 'now') {
             $time_to_send = time();
         }
@@ -83,22 +63,6 @@ class Message extends nterms\mailqueue\Message
                 if( !$item->charset ) {
                     $item->charset = $part->getCharset();
                 }
-            }
-        }
-        /**
-         if time to send is now then send mail and track in db
-        */
-        if($time_to_send == 'now') {
-            if ($message = $item->toMessage()) {
-                if ($this->send($message)) {
-                    $item->sent_time = new \yii\db\Expression('NOW()');
-                    $attributes[] = 'sent_time';
-                } else {
-                    $success = false;
-                }
-
-                $item->attempts++;
-                $item->last_attempt_time = new \yii\db\Expression('NOW()');
             }
         }
 
