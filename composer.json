@@ -1,0 +1,28 @@
+{
+	"name": "xeois/yii2-mailqueue",
+	"description": "Email queue component for yii2 that works with yii2-swiftmailer.",
+	"keywords": ["yii2", "extension", "component", "email", "queue", "swiftmailer", "yii2-swiftmailer"],
+	"homepage": "https://github.com/mhussain001/yii2-mailqueue",
+	"type": "yii2-extension",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mohammad Hussain",
+			"email": "m.hussain@xeois.com",
+			"homepage": "http://xeois.com/"
+		}
+	],
+	"require": {
+		"yiisoft/yii2": "*",
+		"yiisoft/yii2-swiftmailer": "~2.0.0",
+		"nterms/yii2-mailqueue": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"nterms\\mailqueue\\": ""
+		}
+	},
+    "extra": {
+        "bootstrap": "nterms\\mailqueue\\Bootstrap"
+    }
+}
