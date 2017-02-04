@@ -17,6 +17,24 @@ use mhussain001\mailqueue\models\Queue;
  */
 class Message extends \yii\swiftmailer\Message
 {
+    public $directMessage;
+    /**
+     * @inheritdoc
+     */
+    public function getDirectMessage()
+    {
+        return $this->directMessage;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setDirectMessage($directMessage=false)
+    {
+        $this->directMessage = $directMessage;
+        return $this;
+
+    }
     /**
      * Enqueue the message storing it in database.
      *

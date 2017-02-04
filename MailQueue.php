@@ -94,6 +94,7 @@ class MailQueue extends Mailer
 		$items = Queue::find()->where(['and', ['sent_time' => NULL], ['!=', 'to', 'a:0:{}'], ['<', 'attempts', $this->maxAttempts], ['<=', 'time_to_send', date('Y-m-d H:i:s')]])->orderBy(['created_at' => SORT_ASC])->limit($this->mailsPerRound);
 		foreach ($items->each() as $item) {
 		    if ($message = $item->toMessage()) {
+		    	$message->setDirectMessage(false);
 			$attributes = ['attempts', 'last_attempt_time'];
 			if ($this->send($message)) {
 			    $item->sent_time = new \yii\db\Expression('NOW()');
@@ -111,5 +112,64 @@ class MailQueue extends Mailer
 
 
 		return $success;
+	}
+
+	protected function sendMessage($message)
+	{
+		if($message->getDirectMessage()) {
+	        $item = new Queue();
+
+	        $item->from = serialize($message->from);
+	        $item->to = serialize($message->getTo());
+	        $item->cc = serialize($message->getCc());
+	        $item->bcc = serialize($message->getBcc());
+	        $item->reply_to = serialize($message->getReplyTo());
+	        $item->charset = $message->getCharset();
+	        $item->subject = $message->getSubject();
+	        $item->attempts = 1;
+	        $item->swift_message = base64_encode(serialize($message));
+	        $item->time_to_send = date('Y-m-d H:i:s', time());
+
+	        $parts = $message->getSwiftMessage()->getChildren();
+	        // if message has no parts, use message
+	        if ( !is_array($parts) || !sizeof($parts) ) {
+	            $parts = [ $message->getSwiftMessage() ];
+	        }
+
+	        foreach( $parts as $part ) {
+	            if( !( $part instanceof \Swift_Mime_Attachment ) ) {
+	                /* @var $part \Swift_Mime_MimeEntity */
+	                switch( $part->getContentType() ) {
+	                    case 'text/html':
+	                        $item->html_body = $part->getBody();
+	                    break;
+	                    case 'text/plain':
+	                        $item->text_body = $part->getBody();
+	                    break;
+	                }
+
+	                if( !$item->charset ) {
+	                    $item->charset = $part->getCharset();
+	                }
+	            }
+	        }
+	    }
+        $mailSent = false;
+		if(parent::sendMessage($message)) {
+		    $mailSent = true;
+		}
+
+		if($message->getDirectMessage()) {
+		    $item->sent_time = new \yii\db\Expression('NOW()');
+			$item->last_attempt_time = new \yii\db\Expression('NOW()');
+			if ($item->validate()) {
+				$item->save();
+			    // all inputs are valid
+			} else {
+			    // validation failed: $errors is an array containing error messages
+			    $errors = $item->errors;
+			}
+        }
+        return $mailSent;
 	}
 }

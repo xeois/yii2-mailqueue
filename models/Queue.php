@@ -59,7 +59,7 @@ class Queue extends ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'attempts', 'last_attempt_time', 'sent_time'], 'integer'],
+            [['created_at', 'attempts'], 'integer'],
             [['time_to_send', 'swift_message'], 'required'],
             [['to', 'cc', 'bcc', 'subject', 'html_body', 'text_body', 'charset'], 'safe'],
         ];
