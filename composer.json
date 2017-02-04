@@ -19,7 +19,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"nterms\\mailqueue\\": ""
+			"mhussain001\\mailqueue\\": ""
 		}
 	},
     "extra": {
